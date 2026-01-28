@@ -9,6 +9,7 @@ import (
 )
 
 func main() {
+	ctx := context.Background()
 	fmt.Println("Start initializing database...")
 
 	// 1. 创建 hg_app_user 表
@@ -38,49 +39,47 @@ CREATE TABLE IF NOT EXISTS hg_app_user (
     KEY idx_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用_普通用户';
 `
-	if _, err := g.DB().Exec(context.Background(), createTableSQL); err != nil {
+	if _, err := g.DB().Exec(ctx, createTableSQL); err != nil {
 		fmt.Printf("Error creating table: %v\n", err)
 	} else {
 		fmt.Println("✅ Table hg_app_user check/create successfully!")
 	}
 
-	// 2. 插入菜单和权限数据
+	// 2. 插入菜单和权限数据（逐条执行）
 	fmt.Println("Start seeding menu data...")
-	menusSQL := `
--- 插入一级菜单：C端管理
-INSERT INTO hg_admin_menu (pid, title, name, path, icon, type, sort, status, created_at, updated_at)
-SELECT 0, 'C端管理', 'app', '/app', 'UserOutlined', 1, 90, 1, NOW(), NOW()
-WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app');
 
--- 插入二级菜单：C端用户
-INSERT INTO hg_admin_menu (pid, title, name, path, component, permissions, type, sort, status, created_at, updated_at)
-SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app'), 'C端用户', 'app-user', 'user', '/app/user/list', '/user/list', 2, 1, 1, NOW(), NOW()
-WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user');
+	sqls := []string{
+		// 插入一级菜单：C端管理
+		`INSERT INTO hg_admin_menu (pid, title, name, path, icon, type, sort, status, created_at, updated_at)
+		SELECT 0, 'C端管理', 'app', '/app', 'UserOutlined', 1, 90, 1, NOW(), NOW()
+		WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app')`,
 
--- 插入按钮权限：查看、编辑、删除等
-INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
-SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '查看', 'app-user-view', '/user/view', 3, 1, NOW(), NOW()
-WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-view');
+		// 插入二级菜单：C端用户
+		`INSERT INTO hg_admin_menu (pid, title, name, path, component, permissions, type, sort, status, created_at, updated_at)
+		SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app'), 'C端用户', 'app-user', 'user', '/app/user/list', '/user/list', 2, 1, 1, NOW(), NOW()
+		WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user')`,
 
-INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
-SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '编辑', 'app-user-edit', '/user/edit', 3, 1, NOW(), NOW()
-WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-edit');
+		// 插入按钮权限：查看
+		`INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
+		SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '查看', 'app-user-view', '/user/view', 3, 1, NOW(), NOW()
+		WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-view')`,
 
-INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
-SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '删除', 'app-user-delete', '/user/delete', 3, 1, NOW(), NOW()
-WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-delete');
-`
+		// 插入按钮权限：编辑
+		`INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
+		SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '编辑', 'app-user-edit', '/user/edit', 3, 1, NOW(), NOW()
+		WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-edit')`,
 
-	// 逐条执行或者批量执行。g.DB().Exec 支持多条语句（如果驱动支持），不用分号分割可能报错。
-	// 为保险起见，我们简单地一次性执行（如果底层支持）或者分开。
-	// MySQL 驱动通常支持多条语句。
-	if _, err := g.DB().Exec(context.Background(), menusSQL); err != nil {
-		fmt.Printf("Error seeding menus (partially): %v\n", err)
-	} else {
-		fmt.Println("✅ Menu data seeded successfully!")
+		// 插入按钮权限：删除
+		`INSERT INTO hg_admin_menu (pid, title, name, permissions, type, status, created_at, updated_at)
+		SELECT (SELECT id FROM hg_admin_menu WHERE name = 'app-user'), '删除', 'app-user-delete', '/user/delete', 3, 1, NOW(), NOW()
+		WHERE NOT EXISTS (SELECT 1 FROM hg_admin_menu WHERE name = 'app-user-delete')`,
 	}
 
-	// 3. 赋予超级管理员所有权限（可选，通常 super 角色拥有所有权限，不需要显式关联）
-	// 如果需要显式关联，需要插入 hg_admin_role_menu 表。
-	// 这里假设 super 角色自动拥有所有权限或已正确配置。
+	for _, sql := range sqls {
+		if _, err := g.DB().Exec(ctx, sql); err != nil {
+			fmt.Printf("Error executing SQL: %v\nSQL: %s\n", err, sql)
+		}
+	}
+
+	fmt.Println("✅ Menu data seeded successfully!")
 }
