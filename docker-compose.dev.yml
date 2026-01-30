@@ -7,7 +7,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: jmqs18666
-      MYSQL_DATABASE: meme
+      MYSQL_DATABASE: hotgo
       MYSQL_USER: leo
       MYSQL_PASSWORD: jmqs18666
       TZ: Asia/Shanghai
