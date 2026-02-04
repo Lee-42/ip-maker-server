@@ -3,7 +3,7 @@
 // @Copyright  Copyright (c) 2023 HotGo CLI
 // @Author  Ms <133814250@qq.com>
 // @License  https://github.com/bufanyun/hotgo/blob/master/LICENSE
-package v1
+package user
 
 import "github.com/gogf/gf/v2/frame/g"
 

@@ -6,10 +6,10 @@ package user
 
 import (
 	"context"
-	v1 "hotgo/api/api/user/v1"
+	v1 "hotgo/api/api/meme/v1/user"
 	"hotgo/internal/library/contexts"
 	"hotgo/internal/model/input/appin"
-	"hotgo/internal/service"
+	"hotgo/internal/service/meme"
 
 	"github.com/gogf/gf/v2/errors/gerror"
 )
@@ -21,7 +21,7 @@ type cUser struct{}
 
 // Register 用户注册
 func (c *cUser) Register(ctx context.Context, req *v1.RegisterReq) (res *v1.RegisterRes, err error) {
-	userId, err := service.AppUser().Register(ctx, &appin.UserRegisterInp{
+	userId, err := meme.AppUser().Register(ctx, &appin.UserRegisterInp{
 		Username: req.Username,
 		Password: req.Password,
 		Mobile:   req.Mobile,
@@ -40,7 +40,7 @@ func (c *cUser) Register(ctx context.Context, req *v1.RegisterReq) (res *v1.Regi
 
 // Login 用户登录
 func (c *cUser) Login(ctx context.Context, req *v1.LoginReq) (res *v1.LoginRes, err error) {
-	tokenString, user, err := service.AppUser().Login(ctx, &appin.UserLoginInp{
+	tokenString, user, err := meme.AppUser().Login(ctx, &appin.UserLoginInp{
 		Username: req.Username,
 		Password: req.Password,
 	})
@@ -72,7 +72,7 @@ func (c *cUser) Info(ctx context.Context, req *v1.InfoReq) (res *v1.InfoRes, err
 		return
 	}
 
-	user, err := service.AppUser().GetUserInfo(ctx, userId)
+	user, err := meme.AppUser().GetUserInfo(ctx, userId)
 	if err != nil {
 		return
 	}
@@ -103,7 +103,7 @@ func (c *cUser) Update(ctx context.Context, req *v1.UpdateReq) (res *v1.UpdateRe
 		return
 	}
 
-	err = service.AppUser().UpdateProfile(ctx, userId, &appin.UserUpdateProfileInp{
+	err = meme.AppUser().UpdateProfile(ctx, userId, &appin.UserUpdateProfileInp{
 		Nickname: req.Nickname,
 		Avatar:   req.Avatar,
 		Sex:      req.Sex,

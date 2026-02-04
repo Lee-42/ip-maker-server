@@ -10,7 +10,8 @@ import (
 	"hotgo/internal/consts"
 	"hotgo/internal/controller/api/member"
 	"hotgo/internal/controller/api/pay"
-	"hotgo/internal/controller/api/user"
+	"hotgo/internal/controller/api/meme/upload"
+	"hotgo/internal/controller/api/meme/user"
 	"hotgo/internal/service"
 	"hotgo/utility/simple"
 
@@ -27,6 +28,7 @@ func Api(ctx context.Context, group *ghttp.RouterGroup) {
 		group.Bind(
 			member.NewV1(), // 管理员
 			user.User,      // C端用户
+			upload.Upload,  // 上传
 		)
 	})
 }

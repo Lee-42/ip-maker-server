@@ -14,7 +14,7 @@ import (
 	"hotgo/internal/model"
 	"hotgo/internal/model/entity"
 	"hotgo/internal/model/input/appin"
-	"hotgo/internal/service"
+	"hotgo/internal/service/meme"
 	"hotgo/utility/validate"
 
 	"github.com/gogf/gf/v2/crypto/gmd5"
@@ -31,7 +31,7 @@ func NewAppUser() *sAppUser {
 }
 
 func init() {
-	service.RegisterAppUser(NewAppUser())
+	meme.RegisterAppUser(NewAppUser())
 }
 
 // Register 用户注册

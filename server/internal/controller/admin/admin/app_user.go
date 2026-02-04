@@ -7,8 +7,8 @@ package admin
 
 import (
 	"context"
-	"hotgo/api/admin/user"
-	"hotgo/internal/service"
+	"hotgo/api/admin/meme/user"
+	"hotgo/internal/service/meme"
 )
 
 var (
@@ -19,7 +19,7 @@ type cAppUser struct{}
 
 // List 用户列表
 func (c *cAppUser) List(ctx context.Context, req *user.ListReq) (res *user.ListRes, err error) {
-	list, totalCount, err := service.AppUser().List(ctx, &req.UserListInp)
+	list, totalCount, err := meme.AppUser().List(ctx, &req.UserListInp)
 	if err != nil {
 		return
 	}
@@ -32,7 +32,7 @@ func (c *cAppUser) List(ctx context.Context, req *user.ListReq) (res *user.ListR
 
 // View 查看用户详情
 func (c *cAppUser) View(ctx context.Context, req *user.ViewReq) (res *user.ViewRes, err error) {
-	data, err := service.AppUser().View(ctx, &req.UserViewInp)
+	data, err := meme.AppUser().View(ctx, &req.UserViewInp)
 	if err != nil {
 		return
 	}
@@ -45,18 +45,18 @@ func (c *cAppUser) View(ctx context.Context, req *user.ViewReq) (res *user.ViewR
 
 // Edit 编辑用户
 func (c *cAppUser) Edit(ctx context.Context, req *user.EditReq) (res *user.EditRes, err error) {
-	err = service.AppUser().Edit(ctx, &req.UserEditInp)
+	err = meme.AppUser().Edit(ctx, &req.UserEditInp)
 	return
 }
 
 // Delete 删除用户
 func (c *cAppUser) Delete(ctx context.Context, req *user.DeleteReq) (res *user.DeleteRes, err error) {
-	err = service.AppUser().Delete(ctx, &req.UserDeleteInp)
+	err = meme.AppUser().Delete(ctx, &req.UserDeleteInp)
 	return
 }
 
 // Status 更新用户状态
 func (c *cAppUser) Status(ctx context.Context, req *user.StatusReq) (res *user.StatusRes, err error) {
-	err = service.AppUser().UpdateStatus(ctx, &req.UserStatusInp)
+	err = meme.AppUser().UpdateStatus(ctx, &req.UserStatusInp)
 	return
 }
