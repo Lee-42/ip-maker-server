@@ -1,7 +1,7 @@
-package ipin
+package appin
 
 import (
-	"hotgo/addons/ip/model/entity"
+	"hotgo/internal/model/entity"
 	"hotgo/internal/model/input/form"
 )
 

@@ -6,5 +6,4 @@
 package addons
 
 import (
-	_ "hotgo/addons/ip"
 )

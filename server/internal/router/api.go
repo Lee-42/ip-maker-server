@@ -8,10 +8,11 @@ package router
 import (
 	"context"
 	"hotgo/internal/consts"
-	"hotgo/internal/controller/api/member"
-	"hotgo/internal/controller/api/pay"
+	"hotgo/internal/controller/api/ipmaker/ip"
 	"hotgo/internal/controller/api/ipmaker/upload"
 	"hotgo/internal/controller/api/ipmaker/user"
+	"hotgo/internal/controller/api/member"
+	"hotgo/internal/controller/api/pay"
 	"hotgo/internal/service"
 	"hotgo/utility/simple"
 
@@ -29,6 +30,7 @@ func Api(ctx context.Context, group *ghttp.RouterGroup) {
 			member.NewV1(), // 管理员
 			user.User,      // C端用户
 			upload.Upload,  // 上传
+			ip.CIp,         // IP 业务接口
 		)
 	})
 }
