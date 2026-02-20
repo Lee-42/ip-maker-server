@@ -10,10 +10,10 @@ import (
 
 // Ip is the golang structure for table ip.
 type Ip struct {
-	Id          int64       `json:"id"          description:""`
-	Name        string      `json:"name"        description:"ip名称"`
-	Description string      `json:"description" description:"ip描述"`
-	Avatar      string      `json:"avatar"      description:"ip头像"`
-	CreatedAt   *gtime.Time `json:"createdAt"   description:"创建时间"`
-	UpdatedAt   *gtime.Time `json:"updatedAt"   description:"修改时间"`
+	Id          int64       `json:"id"          orm:"id"          description:"ID"`
+	Name        string      `json:"name"        orm:"name"        description:"ip名称"`
+	Description string      `json:"description" orm:"description" description:"ip描述"`
+	Avatar      string      `json:"avatar"      orm:"avatar"      description:"ip头像"`
+	CreatedAt   *gtime.Time `json:"createdAt"   orm:"created_at"  description:"创建时间"`
+	UpdatedAt   *gtime.Time `json:"updatedAt"   orm:"updated_at"  description:"更新时间"`
 }

@@ -9,6 +9,7 @@ import (
 	"context"
 	"hotgo/internal/consts"
 	"hotgo/internal/controller/api/ipmaker/ip"
+	"hotgo/internal/controller/api/ipmaker/story"
 	"hotgo/internal/controller/api/ipmaker/upload"
 	"hotgo/internal/controller/api/ipmaker/user"
 	"hotgo/internal/controller/api/member"
@@ -31,6 +32,7 @@ func Api(ctx context.Context, group *ghttp.RouterGroup) {
 			user.User,      // C端用户
 			upload.Upload,  // 上传
 			ip.CIp,         // IP 业务接口
+			story.CStory,   // Story 业务接口
 		)
 	})
 }

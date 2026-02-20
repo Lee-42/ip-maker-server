@@ -7,6 +7,7 @@ type IPMaker interface {
 	Upload() ipmaker.IUpload
 	User() ipmaker.IAppUser
 	Ip() ipmaker.IIp
+	Story() ipmaker.IStory
 }
 
 var localIPMaker IPMaker

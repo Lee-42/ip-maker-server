@@ -6251,3 +6251,21 @@ CREATE TABLE IF NOT EXISTS `hg_app_user` (
     KEY `idx_status` (`status`),
     KEY `idx_created_at` (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='应用_普通用户';
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `hg_story`
+--
+
+CREATE TABLE IF NOT EXISTS `hg_story` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `ip_id` bigint(20) NOT NULL COMMENT '关联的IP ID',
+  `title` varchar(255) NOT NULL COMMENT '故事标题',
+  `content` text COMMENT '故事内容',
+  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime DEFAULT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='故事表';
+
