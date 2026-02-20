@@ -46,7 +46,7 @@ const (
 	cRunBrief = `running go codes with hot-compiled-like feature`
 	cRunEg    = `
 gf run main.go
-gf run main.go --args "server -p 8080"
+gf run main.go --args "server -p 8081"
 gf run main.go -mod=vendor
 gf run main.go -w "manifest/config/*.yaml"
 `

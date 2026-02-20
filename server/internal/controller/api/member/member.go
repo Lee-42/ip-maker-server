@@ -3,3 +3,13 @@
 // =================================================================================
 
 package member
+
+type cMember struct{}
+
+var Member = cMember{}
+
+// GoogleLogin 谷歌登录
+//func (c *cMember) GoogleLogin(ctx context.Context, req *v1.MemberGoogleLoginReq) (res *v1.MemberGoogleLoginRes, err error) {
+//	res, err = service.Member().GoogleLogin(ctx, req)
+//	return
+//}

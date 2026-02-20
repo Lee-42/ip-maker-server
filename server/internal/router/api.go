@@ -10,8 +10,8 @@ import (
 	"hotgo/internal/consts"
 	"hotgo/internal/controller/api/member"
 	"hotgo/internal/controller/api/pay"
-	"hotgo/internal/controller/api/meme/upload"
-	"hotgo/internal/controller/api/meme/user"
+	"hotgo/internal/controller/api/ipmaker/upload"
+	"hotgo/internal/controller/api/ipmaker/user"
 	"hotgo/internal/service"
 	"hotgo/utility/simple"
 

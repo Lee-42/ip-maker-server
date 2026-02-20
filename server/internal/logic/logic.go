@@ -6,8 +6,8 @@ package logic
 
 import (
 	_ "hotgo/internal/logic/admin"
-	_ "hotgo/internal/logic/meme/upload"
-	_ "hotgo/internal/logic/meme/user"
+	_ "hotgo/internal/logic/ipmaker/upload"
+	_ "hotgo/internal/logic/ipmaker/user"
 	_ "hotgo/internal/logic/common"
 	_ "hotgo/internal/logic/hook"
 	_ "hotgo/internal/logic/middleware"

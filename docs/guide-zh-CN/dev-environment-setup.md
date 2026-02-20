@@ -453,7 +453,7 @@ curl -fsSL https://code-server.dev/install.sh | sh
 
 # 3. 启动 code-server
 export PASSWORD="your-password"
-code-server --bind-addr 0.0.0.0:8080
+code-server --bind-addr 0.0.0.0:8081
 
 # 4. 克隆项目
 git clone https://github.com/your-username/meme-server.git
@@ -465,7 +465,7 @@ docker-compose -f docker-compose.dev.yml up -d
 
 #### 本地通过浏览器访问
 
-访问：`http://your-server.com:8080`
+访问：`http://your-server.com:8081`
 
 #### 或使用 VS Code Remote SSH
 

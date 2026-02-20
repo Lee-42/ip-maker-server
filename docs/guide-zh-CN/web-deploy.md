@@ -243,7 +243,7 @@ VITE_GLOB_API_URL=/api
 
 ```
 server {
-  listen       8080;
+  listen       8081;
   server_name  localhost;
   # 接口代理，用于解决跨域问题
   location /api {
@@ -251,7 +251,7 @@ server {
     proxy_set_header X-Real-IP $remote_addr;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     # 后台接口地址
-    proxy_pass http://110.110.1.1:8080/api;
+    proxy_pass http://110.110.1.1:8081/api;
     proxy_redirect default;
     add_header Access-Control-Allow-Origin *;
     add_header Access-Control-Allow-Headers X-Requested-With;

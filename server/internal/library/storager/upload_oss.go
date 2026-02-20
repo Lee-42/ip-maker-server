@@ -43,7 +43,10 @@ func (d *OssDrive) Upload(ctx context.Context, file *ghttp.UploadFile) (fullPath
 
 	fullPath = GenFullPath(config.OssPath, gfile.Ext(file.Filename))
 	err = bucket.PutObject(fullPath, f2)
-	return
+	if err != nil {
+		return
+	}
+	return config.OssBucketURL + "/" + fullPath, nil
 }
 
 // CreateMultipart 创建分片事件

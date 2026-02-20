@@ -43,7 +43,7 @@ type cDoc struct {
 type cDocInput struct {
 	g.Meta `name:"doc" config:"gfcli.doc"`
 	Path   string `short:"p"  name:"path"    brief:"download docs directory path, default is \"%temp%/goframe\""`
-	Port   int    `short:"o"  name:"port"    brief:"http server port, default is 8080" d:"8080"`
+	Port   int    `short:"o"  name:"port"    brief:"http server port, default is 8081" d:"8081"`
 	Update bool   `short:"u"  name:"update"  brief:"clean docs directory and update docs"`
 	Clean  bool   `short:"c"  name:"clean"   brief:"clean docs directory"`
 	Proxy  string `short:"x"  name:"proxy"   brief:"proxy for download, such as https://hub.gitmirror.com/;https://ghproxy.com/;https://ghproxy.net/;https://ghps.cc/"`
