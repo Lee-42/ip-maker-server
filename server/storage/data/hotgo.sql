@@ -6206,6 +6206,21 @@ ALTER TABLE `hg_test_category`
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
+--
+-- 表的结构 `hg_ip`
+--
+
+CREATE TABLE IF NOT EXISTS `hg_ip` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT 'ip名称',
+  `description` text COMMENT 'ip描述',
+  `avatar` varchar(500) DEFAULT '' COMMENT 'ip头像',
+  `created_at` datetime DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='IP';
+
+
 -- --------------------------------------------------------
 
 --
