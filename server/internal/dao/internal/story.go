@@ -23,6 +23,7 @@ type StoryDao struct {
 type StoryColumns struct {
 	Id        string //
 	IpId      string // 关联的IP ID
+	ChatId    string // 关联的会话ID
 	Title     string // 故事标题
 	Content   string // 故事内容
 	CreatedAt string // 创建时间
@@ -33,6 +34,7 @@ type StoryColumns struct {
 var storyColumns = StoryColumns{
 	Id:        "id",
 	IpId:      "ip_id",
+	ChatId:    "chat_id",
 	Title:     "title",
 	Content:   "content",
 	CreatedAt: "created_at",

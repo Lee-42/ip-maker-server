@@ -28,8 +28,9 @@ type StoryViewInput struct {
 // StoryListInput is the input for listing existing stories.
 type StoryListInput struct {
 	form.PageReq
-	IpId  int64  `json:"ipId" description:"关联的IP ID"`
-	Title string `json:"title" description:"故事标题"`
+	IpId   int64  `json:"ipId" description:"关联的IP ID"`
+	ChatId int64  `json:"chatId" description:"关联的会话ID"`
+	Title  string `json:"title" description:"故事标题"`
 }
 
 // StoryListOutput is the output for listing existing stories.

@@ -50,6 +50,9 @@ func (s *SStory) List(ctx context.Context, in *appin.StoryListInput) (res *appin
 	if in.IpId > 0 {
 		mod = mod.Where("ip_id", in.IpId)
 	}
+	if in.ChatId > 0 {
+		mod = mod.Where("chat_id", in.ChatId)
+	}
 	if in.Title != "" {
 		mod = mod.WhereLike("title", "%"+in.Title+"%")
 	}

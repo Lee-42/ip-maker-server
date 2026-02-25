@@ -14,6 +14,7 @@ type Story struct {
 	g.Meta    `orm:"table:hg_story, do:true"`
 	Id        any         //
 	IpId      any         // 关联的IP ID
+	ChatId    any         // 关联的会话ID
 	Title     any         // 故事标题
 	Content   any         // 故事内容
 	CreatedAt *gtime.Time // 创建时间

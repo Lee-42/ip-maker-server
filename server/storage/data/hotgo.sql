@@ -6262,6 +6262,7 @@ CREATE TABLE IF NOT EXISTS `hg_app_user` (
 CREATE TABLE IF NOT EXISTS `hg_story` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `ip_id` bigint(20) NOT NULL COMMENT '关联的IP ID',
+  `chat_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '关联的会话ID',
   `title` varchar(255) NOT NULL COMMENT '故事标题',
   `content` text COMMENT '故事内容',
   `created_at` datetime DEFAULT NULL COMMENT '创建时间',
