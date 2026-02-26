@@ -29,7 +29,7 @@ type StoryViewInput struct {
 type StoryListInput struct {
 	form.PageReq
 	IpId   int64  `json:"ipId" description:"关联的IP ID"`
-	ChatId int64  `json:"chatId" description:"关联的会话ID"`
+	ChatId string `json:"chatId" description:"关联的会话ID"`
 	Title  string `json:"title" description:"故事标题"`
 }
 

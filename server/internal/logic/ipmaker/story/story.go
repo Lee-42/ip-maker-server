@@ -8,6 +8,7 @@ import (
 
 	"github.com/gogf/gf/v2/errors/gerror"
 	"github.com/gogf/gf/v2/frame/g"
+	"github.com/google/uuid"
 )
 
 // SStory is the service for story.
@@ -37,8 +38,15 @@ func (s *SStory) Edit(ctx context.Context, in *appin.StoryUpdateInput) (err erro
 	return
 }
 
-// Add adds a new story.
 func (s *SStory) Add(ctx context.Context, in *appin.StoryCreateInput) (err error) {
+	newUUID, err := uuid.NewRandom()
+	if err != nil {
+		return gerror.Wrap(err, "failed to generate UUID")
+	}
+
+	// 这里保存标准的 36 位字符串格式
+	in.ChatId = newUUID.String()
+
 	_, err = g.Model("story").Ctx(ctx).Data(in.Story).Insert()
 	return
 }
@@ -50,13 +58,13 @@ func (s *SStory) List(ctx context.Context, in *appin.StoryListInput) (res *appin
 	if in.IpId > 0 {
 		mod = mod.Where("ip_id", in.IpId)
 	}
-	if in.ChatId > 0 {
+	if in.ChatId != "" {
 		mod = mod.Where("chat_id", in.ChatId)
 	}
 	if in.Title != "" {
 		mod = mod.WhereLike("title", "%"+in.Title+"%")
 	}
-	res.Total, err = mod.Count()
+	res.Total, err = mod.Clone().Count()
 	if err != nil {
 		return
 	}
