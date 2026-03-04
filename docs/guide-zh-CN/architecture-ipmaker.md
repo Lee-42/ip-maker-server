@@ -111,3 +111,9 @@ func (c *cIp) Export(ctx context.Context, req *v1.IpExportReq) (res *v1.IpExport
 ```
 
 _（无需手动配置 router 路由，完成这五步，运行服务，`g.Meta` 将自动挂载至 `/api/ip/export`）_
+
+### 第六步（示范）：新增包含状态和多类型的灵感 (Inspo) [补充]
+如果你在业务中需要处理如“互斥多类型(文本/图片)”或“资源使用状态”的设计，你可以参考 Inspo 模块的思路：
+- **`Type` 平铺**：不使用复杂的 JSON 或 interface{} 套娃，而是用明确的 `type` (text/image) 和统一的 `content` 平级字段描述。
+- **`Status` 跟随**：通过 `status` 来标识处理进度（0: 未使用, 1: 已使用），让逻辑流更易控。
+- 详情请查阅该模块的示例及相关的 [Inspo API 文档](../api/inspo-api-doc.md)。

@@ -6270,3 +6270,21 @@ CREATE TABLE IF NOT EXISTS `hg_story` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='故事表';
 
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `hg_inspo`
+--
+
+CREATE TABLE IF NOT EXISTS `hg_inspo` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `title` varchar(255) NOT NULL COMMENT '灵感标题',
+  `type` varchar(20) NOT NULL COMMENT '内容类型,如:text,image',
+  `content` text NOT NULL COMMENT '内容文字或图片URL',
+  `status` tinyint(2) NOT NULL DEFAULT '0' COMMENT '使用状态 0:未使用 1:已生产',
+  `operator` bigint(20) NOT NULL COMMENT '最后操作人ID',
+  `created_at` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='灵感(Inspo)管理表';
